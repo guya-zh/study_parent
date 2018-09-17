@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 开启日志打印详细日志 -->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <!-- 	打印语句无数据	<setting name="logImpl" value="LOG4J"/> -->
+        <!-- 是否启用缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 设置全局懒加载模式 -->
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <!-- 控制延迟加载的属性是否按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 设置是否返回多种结果集 -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!-- 使用列标签代替列名 不同的驱动表现不同 -->
+        <setting name="useColumnLabel" value="true"/>
+        <!-- 允许JDBC生成key 和不同的数据库有关 -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!-- 设置结果集映射属性 NONE 不启用 PARTIAL 不包含嵌套的结果集 FULL 包含复杂的嵌套结果集 -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <!--配置默认的执行器 SIMPLE 不做什么特殊的事情 REUSE 重用预处理的语句 BTACH 重用语句批量更新 -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!-- 设置数据库超时的响应时间 -->
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <!-- 在嵌套的查询语句中是否允许行绑定 -->
+        <setting name="safeRowBoundsEnabled" value="false"/>
+        <!-- 根据JAVA的属性的驼峰属性与数据库字段进行映射 -->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <!-- 本地缓存 防止循环重复的查询并且加快嵌套查询的访问速度 SESSION 所有的查询共享一个SESSION STATEMENT 两个方法调用的是相同的SqlSession数据不共享 -->
+        <setting name="localCacheScope" value="SESSION"/>
+        <!-- 设置JDBCtype 为空时候的值 -->
+        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <!-- 设置触发懒加载的方法 -->
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+</configuration>

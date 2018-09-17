@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xtone.rabbitmq.mapper.MessageMapper">
+
+    <resultMap id="TestBD" type="com.lill.study.domain.po.TestPo">
+        <result column="ID_" property="id"/>
+        <result column="CONTENT" property="content"/>
+    </resultMap>
+    <select id="findAll" resultMap="TestBD">
+        SELECT
+        ID,CONTENT
+        FROM
+        TEST
+    </select>
+</mapper>
