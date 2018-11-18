@@ -1,5 +1,7 @@
 package com.lill.study.mapper;
 
+import com.lill.study.constant.ConstantEnums;
+import com.lill.study.target.CtrlLog;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Repository;
  * @date 2018/9/11 19:23
  * @description 描述当前类的用途
  */
+@CtrlLog(moduleType = ConstantEnums.ModuleType.TEST_M)
 @Repository
 public interface TestMapper {
+    @CtrlLog(description = "全查询")
     public String findAll();
 }
