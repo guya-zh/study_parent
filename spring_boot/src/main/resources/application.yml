@@ -1,16 +1,4 @@
 spring:
+  profiles:
+    active: prod
 
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/message?useUnicode=true&characterEncoding=utf8
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-    max-idle: 10
-    max-wait: 10000
-    min-idle: 5
-    initial-size: 5
-mybatis:
-  mapper-locations: classpath:mappers/*.xml
-  config-location: classpath:mybatis-config.xml
-server:
-  port: 8080
