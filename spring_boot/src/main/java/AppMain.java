@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author 李亮亮
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("com")
 @MapperScan(basePackages = {"com.lill.study.mapper"})
+@EnableAsync/*异步监听开启*/
 public class AppMain {
     public static void main(String[] args) {
         SpringApplication.run(AppMain.class, args);

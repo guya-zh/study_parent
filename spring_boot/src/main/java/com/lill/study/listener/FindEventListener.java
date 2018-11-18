@@ -3,6 +3,7 @@ package com.lill.study.listener;
 import com.lill.study.event.FindEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @date 2018/11/18 16:45
  * @description 事件监听
  */
+
+@Async/*监听异步执行注解*/
 @Component
 public class FindEventListener implements ApplicationListener<FindEvent> {
 
