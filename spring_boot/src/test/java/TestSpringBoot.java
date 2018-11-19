@@ -36,5 +36,12 @@ public class TestSpringBoot {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
+    @Test
+    public void getJson() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/json").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+    }
 
 }

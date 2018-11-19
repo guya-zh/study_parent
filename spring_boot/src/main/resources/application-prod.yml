@@ -16,3 +16,9 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 server:
   port: 80
+logging:
+  path: F:/spring-boot-log
+  level:
+    springframework:
+      web: debug
+

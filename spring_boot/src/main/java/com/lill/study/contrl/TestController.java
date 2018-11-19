@@ -1,14 +1,11 @@
 package com.lill.study.contrl;
 
 import com.lill.study.constant.ConstantEnums;
-import com.lill.study.constant.ConstantEnumsBak;
+import com.lill.study.domain.vo.TestVo;
 import com.lill.study.mapper.TestLog;
-import com.lill.study.mapper.TestMapper;
 import com.lill.study.target.CtrlLog;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -29,5 +26,14 @@ public class TestController {
 //    @ResponseBody
     public String index() {
         return testLog.find();
+    }
+
+    @RequestMapping("/json")
+//    @ResponseBody
+    public TestVo json() {
+        TestVo testVo = new TestVo();
+        testVo.setContent("123456789");
+        testVo.setId("test");
+        return testVo;
     }
 }
