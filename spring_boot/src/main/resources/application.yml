@@ -1,3 +1,14 @@
 spring:
   profiles:
-    active: prod
+    active: dev
+  datasource:
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    show-sql: true
+  data:
+    jpa:
+      repositories:
+        enabled: true

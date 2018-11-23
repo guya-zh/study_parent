@@ -1,5 +1,10 @@
 package com.lill.study.domain.po;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author 李亮亮
  * @project xtone-framework
@@ -7,8 +12,14 @@ package com.lill.study.domain.po;
  * @date 2018/9/11 19:22
  * @description 描述当前类的用途
  */
+
+@Entity
+@Table(name = "test")
 public class TestPo {
+    @Id
+    @Column
     private String id;
+    @Column
     private String content;
 
     public String getId() {

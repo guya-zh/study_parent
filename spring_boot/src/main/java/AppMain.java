@@ -1,10 +1,8 @@
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -15,9 +13,15 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @description 描述当前类的用途
  */
 @SpringBootApplication
+/*基础扫描包*/
 @ComponentScan("com")
-@MapperScan(basePackages = {"com.lill.study.mapper"})
-@EnableAsync/*异步监听开启*/
+/*mybatis 单数据源*/
+//@MapperScan(basePackages = {"com.lill.study.mapper"})
+/*jpa*/
+@EntityScan("com")
+@EnableJpaRepositories("com")
+/*异步监听开启*/
+@EnableAsync
 public class AppMain {
     public static void main(String[] args) {
         SpringApplication.run(AppMain.class, args);

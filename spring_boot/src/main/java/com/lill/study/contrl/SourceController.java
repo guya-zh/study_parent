@@ -4,9 +4,12 @@ import com.lill.study.constant.ConstantEnums;
 import com.lill.study.domain.po.TestPo;
 import com.lill.study.domain.vo.TestVo;
 import com.lill.study.mapper.TestLog;
+import com.lill.study.mapper.read.TestRMapper;
+import com.lill.study.mapper.write.TestWMapper;
 import com.lill.study.srv.TestSrv;
 import com.lill.study.target.CtrlLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,42 +26,26 @@ import java.util.UUID;
  */
 @CtrlLog(moduleType = ConstantEnums.ModuleType.TEST_M)
 @RestController
-public class TestController {
+@RequestMapping("/s")
+public class SourceController {
     @Autowired
-    private TestLog testLog;
+    private TestWMapper testWMapper;
     @Autowired
-    private TestSrv testSrv;
+    private TestRMapper testRMapper;
 
-    @CtrlLog(description = "index方法")
-    @RequestMapping("/index")
+
+    @CtrlLog(description = "写入方法")
+    @RequestMapping("/w")
 //    @ResponseBody
-    public String index() {
-        return testLog.find();
+    public List<TestPo> w() {
+        return testWMapper.findAll();
     }
 
-    @RequestMapping("/json")
+    @CtrlLog(description = "读取方法")
+    @RequestMapping("/r")
 //    @ResponseBody
-    public TestVo json() {
-        TestVo testVo = new TestVo();
-        testVo.setContent("123456789");
-        testVo.setId("test");
-        return testVo;
+    public List<TestPo> r() {
+        return testRMapper.findAll();
     }
 
-
-    @RequestMapping("/jpa")
-//    @ResponseBody
-    public List<TestPo> api() {
-        return testSrv.findAll();
-    }
-
-    @RequestMapping("/uid")
-    String uid(HttpSession session) {
-        UUID uid = (UUID) session.getAttribute("uid");
-        if (uid == null) {
-            uid = UUID.randomUUID();
-        }
-        session.setAttribute("uid", uid);
-        return session.getId();
-    }
 }
