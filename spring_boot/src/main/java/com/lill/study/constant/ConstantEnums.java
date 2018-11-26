@@ -86,4 +86,31 @@ public interface ConstantEnums {
             return explain;
         }
     }
+
+    static enum DataSourceType {
+        READ("只读", "readDataSource", "从库"),
+        WRITE("主库", "writeDataSource", "主库"),;
+
+        private String name;
+        private String code;
+        private String explain;
+
+        private DataSourceType(String name, String code, String explain) {
+            this.code = code;
+            this.name = name;
+            this.explain = explain;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getExplain() {
+            return explain;
+        }
+    }
 }

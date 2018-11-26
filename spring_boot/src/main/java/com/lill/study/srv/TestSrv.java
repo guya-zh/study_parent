@@ -1,8 +1,10 @@
 package com.lill.study.srv;
 
-import com.lill.study.dao.TestDao;
+import com.lill.study.dao.write.TestDao;
 import com.lill.study.domain.po.TestPo;
+import com.lill.study.target.ReadDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +19,28 @@ import java.util.List;
 @Service
 public class TestSrv {
     @Autowired
-    private TestDao testDao;
+    @Qualifier("writeTestDao")
+    private TestDao writeTestDao;
+
+    @Autowired
+    @Qualifier("readTestDao")
+    private com.lill.study.dao.read.TestDao readTestDao;
 
     public List<TestPo> findAll() {
 
-        return testDao.findAll();
+        return writeTestDao.findAll();
+//        return null;
+    }
+    @ReadDataSource
+    public List<TestPo> wfind() {
+
+        return writeTestDao.findAll();
+//        return null;
+    }
+
+    public List<TestPo> find() {
+
+        return readTestDao.findAll();
 //        return null;
     }
 }

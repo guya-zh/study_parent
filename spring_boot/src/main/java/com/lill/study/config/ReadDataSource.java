@@ -23,13 +23,13 @@ import javax.sql.DataSource;
  * @description  多数据源配置类 单数据源不用配置
  */
 @Configuration("myReadDataSource")
-@MapperScan(basePackages = "com.lill.study.mapper.read", sqlSessionTemplateRef = "readSqlSessionTemplate")
+//@MapperScan(basePackages = "com.lill.study.mapper.read", sqlSessionTemplateRef = "readSqlSessionTemplate")
 public class ReadDataSource {
 
     @Bean(name = "readDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.read")
     @Qualifier("readDataSource")
-    @Primary
+//    @Primary
     public DataSource readDataSource() {
         return DataSourceBuilder.create().build();
     }

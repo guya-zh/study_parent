@@ -46,11 +46,24 @@ public class TestController {
     }
 
 
-    @RequestMapping("/jpa")
+    @RequestMapping("/jpaw")
 //    @ResponseBody
     public List<TestPo> api() {
         return testSrv.findAll();
     }
+    @RequestMapping("/jpar")
+//    @ResponseBody
+    public List<TestPo> apir() {
+        return testSrv.find();
+    }
+
+    @RequestMapping("/jpaww")
+//    @ResponseBody
+    public List<TestPo> apiw() {
+        return testSrv.wfind();
+    }
+
+
 
     @RequestMapping("/uid")
     String uid(HttpSession session) {
@@ -60,5 +73,10 @@ public class TestController {
         }
         session.setAttribute("uid", uid);
         return session.getId();
+    }
+
+    public static void main(String[] args) {
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        threadLocal.set("123");
     }
 }

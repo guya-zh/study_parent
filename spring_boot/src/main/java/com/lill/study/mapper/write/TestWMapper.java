@@ -3,6 +3,7 @@ package com.lill.study.mapper.write;
 import com.lill.study.constant.ConstantEnums;
 import com.lill.study.domain.po.TestPo;
 import com.lill.study.target.CtrlLog;
+import com.lill.study.target.ReadDataSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,8 @@ import java.util.List;
 public interface TestWMapper {
     @CtrlLog(description = "全查询")
     public List<TestPo> findAll();
+
+    @ReadDataSource
+    @CtrlLog(description = "查询")
+    public List<TestPo> find();
 }

@@ -17,9 +17,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ComponentScan("com")
 /*mybatis 单数据源*/
 //@MapperScan(basePackages = {"com.lill.study.mapper"})
-/*jpa*/
-@EntityScan("com")
-@EnableJpaRepositories("com")
+/*jpa*/ /*多数据源时关闭 ，但数据原时使用*/
+//@EntityScan("com")
+//@EnableJpaRepositories("com")
 /*异步监听开启*/
 @EnableAsync
 public class AppMain {

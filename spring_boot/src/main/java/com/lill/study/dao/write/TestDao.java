@@ -1,4 +1,4 @@
-package com.lill.study.dao;
+package com.lill.study.dao.write;
 
 import com.lill.study.domain.po.TestPo;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @date 2018/11/21 18:29
  * @description  spring data api
  */
-@Repository
+@Repository("writeTestDao")
 public interface TestDao extends JpaRepository<TestPo, String> {
 //public interface TestDao {
 

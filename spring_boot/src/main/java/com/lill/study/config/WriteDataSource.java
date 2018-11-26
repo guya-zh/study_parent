@@ -27,7 +27,7 @@ import javax.sql.DataSource;
 public class WriteDataSource {
     @Bean(name = "writeDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.write")
-//    @Primary(na)
+    @Primary
     public DataSource testDataSource() {
         return DataSourceBuilder.create().build();
     }
@@ -52,4 +52,5 @@ public class WriteDataSource {
     public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("writeSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+
 }

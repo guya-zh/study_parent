@@ -1,23 +1,24 @@
 package com.lill.study.config;
 
 
+import com.lill.study.constant.ConstantEnums;
+import com.lill.study.datasourceswitch.DynamicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +26,7 @@ import java.util.Map;
  * @project xtone-framework
  * @company 成都信通信息技术有限公司
  * @date 2018/11/23 13:34
- * @description jpa 多数据源配置 数据源
+ * @description jpa 动态多数据源配置 数据源 读写分离 basePackages 覆盖会覆盖其它配置
  */
 
 @Configuration
@@ -33,24 +34,16 @@ import java.util.Map;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "entityManagerFactory",//配置连接工厂 entityManagerFactory
         transactionManagerRef = "transactionManager", //配置 事物管理器  transactionManager
-        basePackages = {"com.lill.study.dao"}//设置dao（repo）所在位置
+        basePackages = {"com.lill.study.dao.read","com.lill.study.dao.write"}//设置dao（repo）所在位置
 )
-public class JpaDataSource {
-
-
-    @Bean(name = "mDataSource")
-    @Qualifier("mDataSource")
-    @ConfigurationProperties(prefix="spring.datasource.read")
-    public DataSource primaryDataSource() {
-        return DataSourceBuilder.create().build();
-    }
+public class ReadWriteJpaDataSource {
 
     @Autowired
     private JpaProperties jpaProperties;
 
     @Autowired
-    @Qualifier("mDataSource")
-    private DataSource primaryDataSource;
+    @Qualifier("roundRobinDataSouceProxy")
+    AbstractRoutingDataSource abstractRoutingDataSource;
 
 
     /**
@@ -58,21 +51,15 @@ public class JpaDataSource {
      * @return
      */
     @Bean(name = "entityManagerFactory")
-    @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryPrimary(EntityManagerFactoryBuilder builder) {
 
-        return builder
-                //设置数据源
-                .dataSource(primaryDataSource)
-                //设置数据源属性
-                .properties(jpaProperties.getProperties())
-                //设置实体类所在位置.扫描所有带有 @Entity 注解的类
-                .packages("com.lill.study.domain.po")
-                // Spring会将EntityManagerFactory注入到Repository之中.有了 EntityManagerFactory之后,
-                // Repository就能用它来创建 EntityManager 了,然后 EntityManager 就可以针对数据库执行操作
-                .persistenceUnit("primaryPersistenceUnit")
-                .build();
-
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setGenerateDdl(true);
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("com.lill.study.domain.po");
+        factory.setDataSource(abstractRoutingDataSource );
+        return factory;
     }
 
 
@@ -83,7 +70,7 @@ public class JpaDataSource {
      * @return
      */
     @Bean(name = "transactionManager")
-    @Primary
+//    @Primary
     PlatformTransactionManager transactionManagerPrimary(EntityManagerFactoryBuilder builder) {
         return new JpaTransactionManager(entityManagerFactoryPrimary(builder).getObject());
     }

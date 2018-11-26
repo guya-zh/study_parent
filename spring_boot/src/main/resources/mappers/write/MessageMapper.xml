@@ -13,4 +13,10 @@
         FROM
         TEST
     </select>
+    <select id="find" resultMap="TestBD">
+        SELECT
+        ID,CONTENT
+        FROM
+        TEST
+    </select>
 </mapper>

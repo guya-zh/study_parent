@@ -2,21 +2,15 @@ package com.lill.study.contrl;
 
 import com.lill.study.constant.ConstantEnums;
 import com.lill.study.domain.po.TestPo;
-import com.lill.study.domain.vo.TestVo;
-import com.lill.study.mapper.TestLog;
 import com.lill.study.mapper.read.TestRMapper;
 import com.lill.study.mapper.write.TestWMapper;
-import com.lill.study.srv.TestSrv;
 import com.lill.study.target.CtrlLog;
 import com.lill.study.target.ReadDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author 李亮亮
@@ -27,19 +21,17 @@ import java.util.UUID;
  */
 @CtrlLog(moduleType = ConstantEnums.ModuleType.TEST_M)
 @RestController
-@RequestMapping("/s")
-public class SourceController {
+@RequestMapping("/d")
+public class DynamicDataSourceController {
     @Autowired
     private TestWMapper testWMapper;
-    @Autowired
-    private TestRMapper testRMapper;
 
 
     @CtrlLog(description = "写入方法")
     @RequestMapping("/w")
 //    @ResponseBody
     public List<TestPo> w() {
-        return testWMapper.findAll();
+        return testWMapper.find();
     }
 
     @ReadDataSource
@@ -47,7 +39,7 @@ public class SourceController {
     @RequestMapping("/r")
 //    @ResponseBody
     public List<TestPo> r() {
-        return testRMapper.findAll();
+        return testWMapper.findAll();
     }
 
 }
