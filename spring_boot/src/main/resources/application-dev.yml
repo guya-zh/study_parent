@@ -25,6 +25,12 @@ spring:
     database: 10
     host: 10.8.8.12
     port: 6379
+  rabbitmq:
+    host: 10.8.8.12
+    port: 5672
+    username: admin
+    password: 123456
+    virtual-host: cbec_dev
 mybatis:
 #  mapper-locations: classpath:mappers/*.xml #多数据源时不再这里配置
   config-location: classpath:mybatis-config.xml
