@@ -12,3 +12,11 @@ spring:
     jpa:
       repositories:
         enabled: true
+servlet_url: /tj/*
+target_url: http://report.cdkjt.com.cn
+static_servlet_url: /anyrt/*
+static_target_url: http://report.cdkjt.com.cn/anyrt
+report_servlet_url: /report/*
+report_target_url: http://report.cdkjt.com.cn/report
+demo_servlet_url: /demo/*
+demo_target_url: http://127.0.0.1:8080/proxy

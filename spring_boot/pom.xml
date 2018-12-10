@@ -9,7 +9,38 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring_boot</artifactId>
-    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!-- works with v4.3 and forward; see .travis.yml -->
+        <httpclient.version>4.5.3</httpclient.version>
+        <!-- the last version to provide LocalTestServer.java -->
+        <httpclient.test.version>4.3.5</httpclient.test.version>
+    </properties>
+    <artifactId>spring_boot</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.mitre.dsmiley.httpproxy</groupId>
+            <artifactId>smiley-http-proxy-servlet</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>javax.servlet-api</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>junit</groupId>-->
+            <!--<artifactId>junit</artifactId>-->
+            <!--<version>4.12</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>httpunit</groupId>-->
+            <!--<artifactId>httpunit</artifactId>-->
+            <!--<version>1.7</version>-->
+        <!--</dependency>-->
+    </dependencies>
 </project>
